@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\LineEditor.cs" />
     <Compile Include="Assets\Editor\PathEditor.cs" />
+    <Compile Include="Assets\LeanTween\Editor\LeanTweenDocumentationEditor.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Soykan/Documents/Oyun/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
