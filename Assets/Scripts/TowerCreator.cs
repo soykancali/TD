@@ -7,6 +7,7 @@ public class TowerCreator : MonoBehaviour
     public GameObject tower1, tower2, tower3, tower4;
     RaycastHit hit;
     Ray ray;
+    int bufferIndex;
     private void Start()
     {
         towerMenu("");
@@ -54,7 +55,7 @@ public class TowerCreator : MonoBehaviour
             }
         }
     }
-    int bufferIndex;
+    
 
     void towerSelect(string name, GameObject hitObj)
     {

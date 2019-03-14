@@ -52,31 +52,5 @@ public class EnemySpawn : MonoBehaviour
         }
 
     }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag.Equals("bullet"))
-        {
-            monsterHealth.value -= 0.2f;
-            health -= 0.2f;
-            Destroy(other.gameObject);
-            if (health <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag.Equals("bullet"))
-        {
-            monsterHealth.value -= 0.2f;
-            health -= 0.2f;
-            Destroy(other.gameObject);
-            if (health <= 0)
-            {
-                Destroy(this.gameObject);
-            }
-        }
-    }
+   
 }

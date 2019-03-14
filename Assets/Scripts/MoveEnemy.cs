@@ -3,59 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class MoveEnemy : Singleton<MoveEnemy>
-{ // Array of waypoints to walk from one to the next one
+{   //noktalarımızı tuttugumuz listemiz
     [SerializeField]
     public Transform[] waypoints;
-    // Walk speed that can be set in Inspector
     [SerializeField]
-    public static float moveSpeed = 0.75f;
+   public static float moveSpeed = 0.5f;
     public static int reach=0;
-    // Index of current waypoint from which Enemy walks
-    // to the next one
+    // yolumuzu tutan listemizin indexini belirliyoruz 0dan başlayıp 10-20 kaç noktamız varsa tek tek artırıp a-->b b-->c... gibi hareket ettirecegiz
     private int waypointIndex = 0;
+    // can barımız
     public Slider monsterHealth;
     public float health;
 
 
 
-    // Use this for initialization
+    // sadece başlangıçta çalışan fonksyonumuz
     private void Start()
     {
         
-        // Set position of Enemy as position of the first waypoint
+        // monsterımıza ilk yürüyecegi noktayı atıyoruz
         transform.position = waypoints[waypointIndex].transform.position;
     }
 
-    // Update is called once per frame
+    // sürekli çagırılan fonsyonumuz
     private void Update()
     {
         
         
-        // Move Enemy
+        // yürütme metodumuzu çagırdık
         Move();
     }
 
-    // Method that actually make Enemy walk
+    // yürütme metodumuz
     private void Move()
     {
-        // If Enemy didn't reach last waypoint it can move
-        // If enemy reached last waypoint then it stops
+        // monster son noktaya erişene kadar süreki devam ediyoruz
         if (waypointIndex <= waypoints.Length - 1)
         {
 
-            // Move Enemy from current waypoint to the next one
-            // using MoveTowards method
+            // monster bir noktadan digerine movetowards metodu ile ilerliyo 
+            //metod 3 parametre alıyor şuanki noktası,gidilecek nokta ve mesafe
             transform.position = Vector2.MoveTowards(transform.position,
                waypoints[waypointIndex].transform.position,
                moveSpeed * Time.deltaTime);
 
-            // If Enemy reaches position of waypoint he walked towards
-            // then waypointIndex is increased by 1
-            // and Enemy starts to walk to the next waypoint
+            //monster istenen noktaya eriştiyse index 1 artılıp gidecegi sonraki pozisyonu belirliyoruz
             if (transform.position == waypoints[waypointIndex].transform.position)
             {
                 waypointIndex += 1;
             }
+            //son waypointteyse reachı bir artırdık 
             if (waypointIndex == waypoints.Length)
             {
                 reach = +1;
@@ -63,12 +60,13 @@ public class MoveEnemy : Singleton<MoveEnemy>
             }
         }
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        //monsterimize bullet tagında nesne degerse canını azaltıyoruz,bullet nesnemizi yokediyoruz monsterin healtı 0 olursada monsterimizi yokediyoruz
         if (other.tag.Equals("bullet"))
         {
-            monsterHealth.value -= 0.2f;
-            health -= 0.2f;
+            monsterHealth.value -= 0.5f;
+            health -= 0.5f;
             Destroy(other.gameObject);
             if (health <= 0)
             {
@@ -76,13 +74,12 @@ public class MoveEnemy : Singleton<MoveEnemy>
             }
         }
     }
-
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit2D(Collider2D other)
     {
         if (other.tag.Equals("bullet"))
         {
-            monsterHealth.value -= 0.2f;
-            health -= 0.2f;
+            monsterHealth.value -= 0.5f;
+            health -= 0.5f;
             Destroy(other.gameObject);
             if (health <= 0)
             {

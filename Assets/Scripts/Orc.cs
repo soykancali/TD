@@ -2,21 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orc : MonoBehaviour
+public class Orc :Singleton<Orc>
 {
-    Rigidbody rb;
+    Rigidbody2D rb;
     Collider cd;
     Animator anim;
-    int healthPoints = 100;
+    private float hp;
     bool isDead, isWalking;
+    private Vector3 localscale;
    
     // Vector3 localscale;
     void Start()
     {
-        anim.SetTrigger("walk");
-        rb = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-       // localscale = transform.localScale;
+        //anim.SetTrigger("walk");
+        hp = MoveEnemy.Instance.health;
+       
+        localscale = transform.localScale;
 
         
     }
@@ -24,47 +27,26 @@ public class Orc : MonoBehaviour
    
     void Update()
     {
-        SetAnimationState();
+        SetAnimState();
         Debug.Log("anim",anim);
         
     }
-    void SetAnimationState()
+    void SetAnimState()
     {
-        if (MoveEnemy.moveSpeed > 0.1f)
+        if (rb.velocity.x>0||rb.velocity.y>0)
         {
             anim.SetBool("isWalking",true);
             anim.SetBool("isDead",false);
         }
-        if(MoveEnemy.moveSpeed==0 && healthPoints>0)
-        {
-            anim.SetBool("isAttacking",true);
-            anim.SetBool("isWalking",false);
-        }
-        if(MoveEnemy.moveSpeed==0 && healthPoints==0)
+      
+        if(hp==0)
         {
             anim.SetBool("isDead",true);
             anim.SetBool("isWalking",false);
 
         }
     }
-    
-     private void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.name.Equals("bullet"))
-        {
-            healthPoints -= 1;
-        }
 
-        if (col.gameObject.name.Equals("bullet") && healthPoints > 0)
-        {
-            anim.SetTrigger("isWalking");          
-            
-        }
-        else
-        {
-            
-            isDead = true;
-            anim.SetTrigger("isDead");
-        }
-    }
+
+
 }

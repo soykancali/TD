@@ -13,6 +13,6 @@ public class BulletMove : MonoBehaviour
     }
     private void Start()
     {
-        LeanTween.move(this.gameObject, targePosition, 1);
+        LeanTween.move(this.gameObject, targePosition, 1f);
     }
 }
