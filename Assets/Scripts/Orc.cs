@@ -5,7 +5,7 @@ using UnityEngine;
 public class Orc :Singleton<Orc>
 {
     Rigidbody2D rb;
-    Collider cd;
+    Collider2D cd;
     Animator anim;
     private float hp;
     bool isDead, isWalking;
@@ -16,6 +16,7 @@ public class Orc :Singleton<Orc>
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        cd = GetComponent<Collider2D>();
         //anim.SetTrigger("walk");
         hp = MoveEnemy.Instance.health;
        
@@ -33,18 +34,17 @@ public class Orc :Singleton<Orc>
     }
     void SetAnimState()
     {
-        if (rb.velocity.x>0||rb.velocity.y>0)
+        if (hp>=0)
         {
-            anim.SetBool("isWalking",true);
-            anim.SetBool("isDead",false);
+            anim.SetBool("isWalking", true);
+            anim.SetBool("isDead", false);
         }
-      
-        if(hp==0)
-        {
-            anim.SetBool("isDead",true);
-            anim.SetBool("isWalking",false);
-
+        if(hp <= 0)
+                {
+            anim.SetBool("isDead", true);
+            anim.SetBool("isWalking", false);
         }
+       
     }
 
 

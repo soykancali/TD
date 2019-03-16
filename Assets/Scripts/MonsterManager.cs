@@ -11,114 +11,120 @@ public class MonsterManager : MonoBehaviour
     private void Start()
     {
 
-        InvokeRepeating("monsterSelect", 1f, monsterCreateTime);
+        InvokeRepeating("creator", 1f, monsterCreateTime);
 
     }
-    private void monsterSelect(string name, string tag)
+    void creator()
     {
-        switch (tag)
-        {
-            case "monster":
-                {
-                    monsterCreator(name);
-                    
-                }
-                break;
-        }
-
-    }
-    private void monsterCreator(string name)
-    {
-
-
-        switch (name)
-        {
-            case "orc":
-                {
-                    //Instantiate(orc, MonsterList.instance.monsterList[bufferIndex].getMonsterGo().transform.position, Quaternion.identity);
-                    //MonsterList.instance.monsterList[bufferIndex].getPlaceTower().SetActive(false);
-                    orc = MonsterList.instance.monsterList[0].getMonsterGo();
-                    Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
-                }
-                break;
-
-            case "bat":
-                {
-                    bat = MonsterList.instance.monsterList[1].getMonsterGo();
-                    Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
-
-                }
-                break;
-        }
-
-
+        Instantiate(orc, SpawnPoint.transform.position, Quaternion.identity);
     }
 }
 
-        /*sonra düzenlenecek
-         *  private void monsterFinder(string name, string tag)
-         {
-             switch (tag)
+//    private void monsterSelect(string name, string tag)
+//    {
+//        switch (tag)
+//        {
+//            case "monster":
+//                {
+//                    monsterCreator(name);
+
+//                }
+//                break;
+//        }
+
+//    }
+//    private void monsterCreator(string name)
+//    {
+
+
+//        switch (name)
+//        {
+//            case "orc":
+//                {
+//                    //Instantiate(orc, MonsterList.instance.monsterList[bufferIndex].getMonsterGo().transform.position, Quaternion.identity);
+//                    //MonsterList.instance.monsterList[bufferIndex].getPlaceTower().SetActive(false);
+//                    orc = MonsterList.instance.monsterList[0].getMonsterGo();
+//                    Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
+//                }
+//                break;
+
+//            case "bat":
+//                {
+//                    bat = MonsterList.instance.monsterList[1].getMonsterGo();
+//                    Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
+
+//                }
+//                break;
+//        }
+
+
+//    }
+//}
+
+/*sonra düzenlenecek
+ *  private void monsterFinder(string name, string tag)
+ {
+     switch (tag)
+     {
+         case "MonsterGo":
              {
-                 case "MonsterGo":
-                     {
-                         monsterSelect(name);
-                     }
-                     break;
-                 case "monster":
-                     {
-                         monsterCreator(name);
-                     }
-                     break;
+                 monsterSelect(name);
              }
-         }
-         void Creator()
-         {
-
-
-         }
-         private void Update()
-         {
-             monsterFinder(MonsterList.instance.monsterList[bufferIndex].name,MonsterList.instance.monsterList[bufferIndex].name);
-         }
-
-         private void monsterSelect(string name)
-         {
-             for (int i = 0; i < MonsterList.instance.monsterList.Count; i++)
+             break;
+         case "monster":
              {
-                 if (MonsterList.instance.monsterList[i] != null)
-                 {
-
-                     bufferIndex = i;
-                     break;
-                 }
+                 monsterCreator(name);
              }
+             break;
+     }
+ }
+ void Creator()
+ {
 
-         }
 
-         private void monsterCreator(string name)
+ }
+ private void Update()
+ {
+     monsterFinder(MonsterList.instance.monsterList[bufferIndex].name,MonsterList.instance.monsterList[bufferIndex].name);
+ }
+
+ private void monsterSelect(string name)
+ {
+     for (int i = 0; i < MonsterList.instance.monsterList.Count; i++)
+     {
+         if (MonsterList.instance.monsterList[i] != null)
          {
 
-
-             switch (name)
-             {
-                 case "orc":
-                     {
-                         //Instantiate(orc, MonsterList.instance.monsterList[bufferIndex].getMonsterGo().transform.position, Quaternion.identity);
-                         //MonsterList.instance.monsterList[bufferIndex].getPlaceTower().SetActive(false);
-                         orc = MonsterList.instance.monsterList[bufferIndex].getMonsterGo();
-                         Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
-                     }
-                     break;
-
-                 case "bat":
-                     {
-                         bat = MonsterList.instance.monsterList[bufferIndex].getMonsterGo();
-                         Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
-
-                     }
-                     break;
-             }
+             bufferIndex = i;
+             break;
          }
-         */
-    
+     }
+
+ }
+
+ private void monsterCreator(string name)
+ {
+
+
+     switch (name)
+     {
+         case "orc":
+             {
+                 //Instantiate(orc, MonsterList.instance.monsterList[bufferIndex].getMonsterGo().transform.position, Quaternion.identity);
+                 //MonsterList.instance.monsterList[bufferIndex].getPlaceTower().SetActive(false);
+                 orc = MonsterList.instance.monsterList[bufferIndex].getMonsterGo();
+                 Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
+             }
+             break;
+
+         case "bat":
+             {
+                 bat = MonsterList.instance.monsterList[bufferIndex].getMonsterGo();
+                 Instantiate(bat, SpawnPoint.transform.position, Quaternion.identity);
+
+             }
+             break;
+     }
+ }
+ */
+
