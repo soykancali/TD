@@ -2,49 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orc :Singleton<Orc>
+public class Orc : Singleton<Orc>
 {
     Rigidbody2D rb;
     Collider2D cd;
     Animator anim;
+    public GameObject orc;
     private float hp;
-    bool isDead, isWalking;
     private Vector3 localscale;
-   
-    // Vector3 localscale;
+    public bool isDead,isWalking;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
         cd = GetComponent<Collider2D>();
+        anim = gameObject.GetComponent<Animator>();
         //anim.SetTrigger("walk");
-        hp = MoveEnemy.Instance.health;
-       
-        localscale = transform.localScale;
 
-        
     }
-
-   
     void Update()
     {
+        hp = MoveEnemy.Instance.health;
         SetAnimState();
-        Debug.Log("anim",anim);
-        
     }
     void SetAnimState()
     {
-        if (hp>=0)
+        Debug.Log("anim");
+        if (hp >= 0)
         {
             anim.SetBool("isWalking", true);
-            anim.SetBool("isDead", false);
+            Debug.Log("anim1");
         }
-        if(hp <= 0)
-                {
-            anim.SetBool("isDead", true);
+        if (hp <= 1)
+        {
+            
+            Debug.Log("anim2");
+            isDead = true;
             anim.SetBool("isWalking", false);
+            anim.SetBool("isDead", true);
+            anim.SetTrigger("isDead");
         }
-       
+
     }
 
 

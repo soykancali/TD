@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaptureEnemy : MonoBehaviour
+public class CaptureEnemy : Singleton<CaptureEnemy>
 {
-    // Start is called before the first frame update
-    void Start()
+    public static int reachedEnemy = 0;
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.tag.Equals("monster"))
+        {
+            reachedEnemy++;
+            Lifes.instance.setLife();
+        }
     }
 }

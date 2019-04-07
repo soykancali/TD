@@ -10,6 +10,9 @@ TagManager:
   - bullet
   - monster
   - arrow
+  - startButton
+  - delete
+  - subMenu
   layers:
   - Default
   - TransparentFX

@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class BulletMove : MonoBehaviour
 {
-    public static BulletMove insance;
+    public static BulletMove instance;
     public Vector3 targePosition;
 
     private void Awake()
     {
-        insance = this;
+        instance = this;
     }
     private void Start()
     {

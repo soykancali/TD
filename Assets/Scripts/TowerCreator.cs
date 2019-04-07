@@ -26,6 +26,7 @@ public class TowerCreator : MonoBehaviour
 
     void menuEvents(string name, string tag, GameObject hitObj)
     {
+        Debug.Log(tag);
         switch (tag)
         {
             case "PlaceTower":
@@ -38,6 +39,19 @@ public class TowerCreator : MonoBehaviour
                     towerSelect(name, hitObj);
                 }
                 break;
+            case "startButton":
+                {
+                    Lifes.instance.StartSc.SetActive(false);
+                    Lifes.instance.readyText.transform.gameObject.SetActive(true);
+                    Lifes.instance.readyCounter = true;
+                }
+                break;
+            case "delete":
+                {
+                    destroyTower(hitObj);
+                }
+                break;
+
         }
     }
 
@@ -55,7 +69,7 @@ public class TowerCreator : MonoBehaviour
             }
         }
     }
-    
+
 
     void towerSelect(string name, GameObject hitObj)
     {
@@ -77,29 +91,44 @@ public class TowerCreator : MonoBehaviour
         {
             case "TowerArc":
                 {
-                    Instantiate(tower1, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity);
-                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().SetActive(false);
+                    destroyTower(hitObj);
+                    Instantiate(tower1, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity).transform.SetParent(GameObject.Find(hitObj.transform.parent.parent.name).transform);
+                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.GetChild(0).gameObject.SetActive(false);
                 }
                 break;
 
             case "TowerCannon":
                 {
-                    Instantiate(tower2, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity);
-                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().SetActive(false);
+                    destroyTower(hitObj);
+
+                    Instantiate(tower2, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity).transform.SetParent(GameObject.Find(hitObj.transform.parent.parent.name).transform);
+                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.GetChild(0).gameObject.SetActive(false);
                 }
                 break;
             case "TowerMage":
                 {
-                    Instantiate(tower3, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity);
-                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().SetActive(false);
+                    destroyTower(hitObj);
+
+                    Instantiate(tower3, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity).transform.SetParent(GameObject.Find(hitObj.transform.parent.parent.name).transform);
+                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.GetChild(0).gameObject.SetActive(false);
                 }
                 break;
             case "TowerCatapult":
                 {
-                    Instantiate(tower4, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity);
-                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().SetActive(false);
+                    destroyTower(hitObj);
+
+                    Instantiate(tower4, TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.position, Quaternion.identity).transform.SetParent(GameObject.Find(hitObj.transform.parent.parent.name).transform);
+                    TowerManager.instance.towerList[bufferIndex].getPlaceTower().transform.GetChild(0).gameObject.SetActive(false);
                 }
                 break;
+        }
+    }
+
+    void destroyTower(GameObject hit)
+    {
+        if (hit.gameObject.transform.parent.transform.GetChild(0).gameObject)
+        {
+            Destroy(hit.gameObject.transform.parent.transform.GetChild(0).gameObject);
         }
     }
 }

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class MonsterList : Singleton<MonsterList>
 {
+   
+
     public List<Monster> monsterList;
+    [SerializeField]
+    public Transform[] waypoints;
     public static MonsterList instance;
     private void Awake()
     {
         instance = this;
     }
+
      [System.Serializable]
      public class Monster
     {
@@ -24,5 +29,7 @@ public class MonsterList : Singleton<MonsterList>
             return name;
         }
     }
+   
 }
+    
 
